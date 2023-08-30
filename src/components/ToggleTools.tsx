@@ -1,0 +1,39 @@
+"use client";
+import { useState } from "react";
+import clsx from 'clsx';
+
+export function ToggleTools (){
+    const [toolActive, setToolActive] = useState('SHORTLINK');
+
+    const handleChangeToolActive = (tabActive: string) => {
+        console.log('teste')
+        // setToolActive(tabActive)
+    }
+
+    return(
+        <div 
+          className="flex items-center p-2 border border-[#004E8717] bg-blue-300 shadow-lg shadow-[rgba(0, 0, 0, 0.08)] rounded-lg w-max"
+        >
+            <button 
+                className={clsx(
+                    "flex items-center justify-center w-32 h-12 p-4 font-semibold rounded-lg text-black-300", {
+                        'text-white bg-blue-500': toolActive === 'SHORTLINK'
+                    }
+                )}
+                onClick={() => handleChangeToolActive('SHORTLINK')}
+            >
+                Encurtador
+            </button>
+            <button 
+                className={clsx(
+                    "flex items-center justify-center w-32 h-12 p-4 font-semibold rounded-lg text-black-300", {
+                        'text-white bg-blue-500': toolActive === 'QRCODE'
+                    }
+                )}
+                onClick={() => handleChangeToolActive('QRCODE')}
+            >
+                QR code
+            </button>
+        </div>
+    )
+}

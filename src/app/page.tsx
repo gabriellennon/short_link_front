@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
-import { Link } from 'lucide-react';
+import { Link as LinkIcon } from 'lucide-react';
+import { ToggleTools } from '@/components/ToggleTools';
 
 export default function Home() {
   const [customLink, setCustomLink] = useState(false);
@@ -19,16 +20,7 @@ export default function Home() {
     <div className="h-screen bg-blue-200">
       <main className="w-full flex flex-col items-center justify-center mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         {/* Toggle tools */}
-        <div 
-          className="flex items-center p-2 border border-[#004E8717] bg-blue-300 shadow-lg shadow-[rgba(0, 0, 0, 0.08)] rounded-lg w-max"
-        >
-          <button className="flex items-center justify-center w-32 h-12 p-4 font-semibold text-white rounded-lg bg-blue-500">
-            Encurtador
-          </button>
-          <button className="flex items-center justify-center w-32 h-12 p-4 font-semibold text-black-300 rounded-lg">
-            QR code
-          </button>
-        </div>
+        <ToggleTools />
         {/* Box tool */}
         <div 
           className="bg-blue-300 border border-[#D2D8DE] rounded-lg py-6 sm:px-6 lg:px-8 mt-11 flex flex-col items-center justify-center gap-8 w-full"
@@ -52,7 +44,7 @@ export default function Home() {
                     <span 
                       className="text-gray-500 sm:text-sm"
                     >
-                      <Link className="h-5 w-5 text-[#A0ACB2]" />
+                      <LinkIcon className="h-5 w-5 text-[#A0ACB2]" />
                     </span>
                   </div>
                   <input 
