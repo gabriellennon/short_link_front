@@ -67,7 +67,7 @@ export default function Home() {
                           value="" 
                           id="checked-toggle" 
                           className="sr-only peer" 
-                          defaultChecked={customLink}
+                          // defaultChecked={customLink}
                           onChange={handleActiveCustomLink}
                           checked={customLink}
                           placeholder="Personalizar Link"
@@ -91,7 +91,7 @@ export default function Home() {
                           value="" 
                           id="checked-toggle" 
                           className="sr-only peer" 
-                          defaultChecked={generateQRCode}
+                          // defaultChecked={generateQRCode}
                           onChange={handleGenerateQRCode}
                           checked={generateQRCode}
                           placeholder="Gerar QR Code"
