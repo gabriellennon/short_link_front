@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <div className="h-screen bg-blue-200">
-      <main className="w-full flex flex-col items-center justify-center mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <main className="w-full flex flex-col items-center justify-center mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
         <ToggleTools setToolActive={handleChangeToolActive} toolActive={toolActive} />
         {toolActive === 'SHORTLINK' ? (
           <BoxTool 
