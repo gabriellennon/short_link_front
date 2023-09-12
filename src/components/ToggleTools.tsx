@@ -1,14 +1,12 @@
 "use client";
-import { useState } from "react";
 import clsx from 'clsx';
 
-export function ToggleTools (){
-    const [toolActive, setToolActive] = useState('SHORTLINK');
+type TToggleToolsProps = {
+    setToolActive: (tabActive: string) => void;
+    toolActive: string;
+}
 
-    const handleChangeToolActive = (tabActive: string) => {
-        console.log('teste')
-        // setToolActive(tabActive)
-    }
+export function ToggleTools ({ setToolActive, toolActive }: TToggleToolsProps){
 
     return(
         <div 
