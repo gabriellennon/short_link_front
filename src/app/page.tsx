@@ -14,6 +14,7 @@ export default function Home() {
   // const [generateQRCode, setGenerateQRCode] = useState(false);
   const [toolActive, setToolActive] = useState('SHORTLINK');
   const [linkToCut, setLinkToCut] = useState('');
+  const [loadingCut, setLoadingCut] = useState(false);
 
   const handleChangeToolActive = (tabActive: string) => {
     setToolActive(tabActive)
@@ -26,6 +27,10 @@ export default function Home() {
 
   const handleTypeLink = (event: ChangeEvent<HTMLInputElement>) => {
     setLinkToCut(event.target.value)
+  }
+
+  const handleCutLink = () => {
+    setLoadingCut(true);
   }
 
   // const handleGenerateQRCode = () => {
@@ -70,6 +75,9 @@ export default function Home() {
               </div>
               <Button 
                 title='Encurtar link'
+                loading={loadingCut}
+                disabled={loadingCut}
+                onClick={handleCutLink}
               />
             </div>
           </BoxTool>
