@@ -20,7 +20,7 @@ export function ToggleTools (){
                         'text-white bg-blue-500': toolActive === 'SHORTLINK'
                     }
                 )}
-                onClick={() => handleChangeToolActive('SHORTLINK')}
+                onClick={() => setToolActive('SHORTLINK')}
             >
                 Encurtador
             </button>
@@ -30,7 +30,7 @@ export function ToggleTools (){
                         'text-white bg-blue-500': toolActive === 'QRCODE'
                     }
                 )}
-                onClick={() => handleChangeToolActive('QRCODE')}
+                onClick={() => setToolActive('QRCODE')}
             >
                 QR code
             </button>
