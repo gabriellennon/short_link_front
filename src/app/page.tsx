@@ -1,5 +1,6 @@
 "use client";
 import { ChangeEvent, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { Link as LinkIcon } from 'lucide-react';
 import { ToggleTools } from '@/components/ToggleTools';
 import { BoxTool } from '@/components/BoxTool';
@@ -8,12 +9,17 @@ import { Switch } from '@/components/Switch';
 import { Input } from '@/components/Input';
 import buildingImage from '@/assets/img/tell-us-about-your-needs-product.png';
 import Image from 'next/image';
+import { shortNewLink } from '@/services/shortner.service';
+import { isURLValid, removeHttpsPrefix } from '@/utils/functions';
+import { TResponseShortnerPOST } from '@/services/types';
+import { CopyArea } from '@/components/CopyArea';
 
 export default function Home() {
   const [customLink, setCustomLink] = useState(false);
   // const [generateQRCode, setGenerateQRCode] = useState(false);
   const [toolActive, setToolActive] = useState('SHORTLINK');
   const [linkToCut, setLinkToCut] = useState('');
+  const [shortLinkToCopy, setShortLinkToCopy] = useState('');
   const [loadingCut, setLoadingCut] = useState(false);
 
   const handleChangeToolActive = (tabActive: string) => {
@@ -31,6 +37,32 @@ export default function Home() {
 
   const handleCutLink = () => {
     setLoadingCut(true);
+
+    if(linkToCut.length && isURLValid(linkToCut) && linkToCut.includes('https://' || 'http://')) {
+      const cutLinkObject = {
+        originalUrl: linkToCut
+      }
+      shortNewLink(cutLinkObject).then((response) => {
+        const responseData: TResponseShortnerPOST = response.data
+        localStorage.setItem(`@-link-${responseData.code}`, JSON.stringify(responseData));
+        setLinkToCut('');
+        // @TO-DO: Pensar como diminuir esse link (Mandei mensagem pro jose)
+        const linkToRedirect = `https://link-shortner-production.up.railway.app/shortner/${responseData.code}`;
+        navigator.clipboard.writeText(linkToRedirect);
+        setShortLinkToCopy(linkToRedirect);
+        toast.success("Link criado e copiado! 🤩");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Ops! Algo deu errado, tente novamente. 😵‍💫");
+      })
+      .finally(() => {
+        setLoadingCut(false);
+      })
+    } else {
+      toast.error("Digite uma URL válida!");
+      setLoadingCut(false);
+    }
   }
 
   // const handleGenerateQRCode = () => {
@@ -57,6 +89,7 @@ export default function Home() {
                   onChange={handleTypeLink}
                   placeholder="Exemplo: https://siteABC.com/campanha-site..." 
                   value={linkToCut}
+                  readOnly={loadingCut}
                 />
                 {/* Toggles */}
                 <div className="flex items-center justify-center gap-4">
@@ -73,6 +106,11 @@ export default function Home() {
                   /> */}
                 </div>
               </div>
+              {!!shortLinkToCopy && (
+                <div className="mt-6">
+                  <CopyArea title={removeHttpsPrefix(shortLinkToCopy)} textToCopy={shortLinkToCopy} />
+                </div>
+              )}
               <Button 
                 title='Encurtar link'
                 loading={loadingCut}
@@ -100,6 +138,10 @@ export default function Home() {
             </div>
           </BoxTool>
         )}
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
       </main>
     </div>
 

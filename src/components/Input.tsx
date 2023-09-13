@@ -1,14 +1,14 @@
 import React, { ChangeEvent } from 'react';
 import { LucideIcon } from 'lucide-react';
 
-type TInputProps = {
+interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement>{
     Icon?: LucideIcon;
     placeholder?: string;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     value?: string;
 }
 
-export function Input({ Icon, placeholder, onChange, value }: TInputProps){
+export function Input({ Icon, placeholder, onChange, value, ...rest }: IInputProps){
     return(
         <div className=" lg:w-[440px]">
             <div className="relative mt-2 rounded-lg shadow-sm">
@@ -27,6 +27,7 @@ export function Input({ Icon, placeholder, onChange, value }: TInputProps){
                     placeholder={placeholder}
                     onChange={onChange}
                     value={value}
+                    {...rest}
                 />
             </div>
         </div>
