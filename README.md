@@ -29,3 +29,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 [Protótipo](https://www.figma.com/file/tyLBdEvl66kA5yecnKuS7W/Projetos-Pessoais?type=design&node-id=1%3A2&mode=design&t=pSUWpBFWPGlQ82fZ-1)
+
+-[next-intl](https://next-intl-docs.vercel.app/) Internationalization for Next.js
