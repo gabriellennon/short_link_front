@@ -13,8 +13,13 @@ import { shortNewLink } from '@/services/shortner.service';
 import { isURLValid, removeHttpsPrefix } from '@/utils/functions';
 import { TResponseShortnerPOST } from '@/services/types';
 import { CopyArea } from '@/components/CopyArea';
+import { getDictionaryServerOnly } from '@/dictionaries/default-dictionary-server-only';
+import { Locale } from '@/config/i18n.config';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
-export default function Home() {
+export default function Home({ params }: { params: { lang: Locale }}) {
+  const dict = getDictionaryServerOnly(params.lang)
+
   const [customLink, setCustomLink] = useState(false);
   // const [generateQRCode, setGenerateQRCode] = useState(false);
   const [toolActive, setToolActive] = useState('SHORTLINK');
@@ -71,6 +76,12 @@ export default function Home() {
 
   return (
     <div className="h-screen bg-blue-200">
+      <div className='flex gap-5 items-center justify-end w-full p-2'>
+        <span className='font-thin text-sm text-zinc-700'>
+          Selecione a linguagem:
+        </span>
+        <LanguageSwitcher activeLanguage={params.lang} />
+      </div>
       <main className="w-full flex flex-col items-center justify-center mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
         <ToggleTools setToolActive={handleChangeToolActive} toolActive={toolActive} />
         {toolActive === 'SHORTLINK' ? (
@@ -81,7 +92,7 @@ export default function Home() {
               <p
                 className="text-grey-400 font-semibold text-base"
               >
-                Cole a URL que deseja encurtar
+                {dict.qrCodePage.title}
               </p>
               <div className="flex flex-col items-center justify-center gap-4 w-full">
                 <Input 
