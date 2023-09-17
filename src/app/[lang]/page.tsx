@@ -54,7 +54,7 @@ export default function Home({ params }: { params: { lang: Locale }}) {
         localStorage.setItem(`@-link-${responseData.code}`, JSON.stringify(responseData));
         setLinkToCut('');
         // @TO-DO: Pensar como diminuir esse link (Mandei mensagem pro jose)
-        const linkToRedirect = `https://www.icut.li/${params.lang}/${responseData.code}`;
+        const linkToRedirect = `https://www.icut.li/${responseData.code}`;
         navigator.clipboard.writeText(linkToRedirect);
         setShortLinkToCopy(linkToRedirect);
         toast.success("Link criado e copiado! 🤩");
