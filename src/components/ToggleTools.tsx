@@ -1,12 +1,15 @@
 "use client";
 import clsx from 'clsx';
+import { getDictionaryServerOnly } from '@/dictionaries/default-dictionary-server-only';
 
 type TToggleToolsProps = {
     setToolActive: (tabActive: string) => void;
     toolActive: string;
+    lang: "en" | "pt-BR";
 }
 
-export function ToggleTools ({ setToolActive, toolActive }: TToggleToolsProps){
+export function ToggleTools ({ setToolActive, toolActive, lang }: TToggleToolsProps){
+    const dict = getDictionaryServerOnly(lang)
 
     return(
         <div 
@@ -20,7 +23,7 @@ export function ToggleTools ({ setToolActive, toolActive }: TToggleToolsProps){
                 )}
                 onClick={() => setToolActive('SHORTLINK')}
             >
-                Encurtador
+                {dict.components.shortLinkButton}
             </button>
             <button 
                 className={clsx(

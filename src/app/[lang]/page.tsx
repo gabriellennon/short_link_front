@@ -54,17 +54,17 @@ export default function Home({ params }: { params: { lang: Locale }}) {
         const linkToRedirect = `https://www.icut.li/${responseData.code}`;
         navigator.clipboard.writeText(linkToRedirect);
         setShortLinkToCopy(linkToRedirect);
-        toast.success("Link criado e copiado! 🤩");
+        toast.success(dict.toasts.successShort);
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Ops! Algo deu errado, tente novamente. 😵‍💫");
+        toast.error(dict.toasts.errorShort);
       })
       .finally(() => {
         setLoadingCut(false);
       })
     } else {
-      toast.error("Digite uma URL válida!");
+      toast.error(dict.toasts.invalidUrl);
       setLoadingCut(false);
     }
   }
@@ -77,12 +77,16 @@ export default function Home({ params }: { params: { lang: Locale }}) {
     <div className="h-screen bg-blue-200">
       <div className='flex gap-5 items-center justify-end w-full p-2'>
         <span className='font-thin text-sm text-zinc-700'>
-          Selecione a linguagem:
+          {dict.shortPage.switchText}
         </span>
         <LanguageSwitcher activeLanguage={params.lang} />
       </div>
       <main className="w-full flex flex-col items-center justify-center mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-        <ToggleTools setToolActive={handleChangeToolActive} toolActive={toolActive} />
+        <ToggleTools 
+          setToolActive={handleChangeToolActive} 
+          toolActive={toolActive} 
+          lang={params.lang}
+        />
         {toolActive === 'SHORTLINK' ? (
           <BoxTool 
             title='Encurte links e personalize com 1 clique!'
@@ -97,7 +101,7 @@ export default function Home({ params }: { params: { lang: Locale }}) {
                 <Input 
                   Icon={LinkIcon}
                   onChange={handleTypeLink}
-                  placeholder="Exemplo: https://siteABC.com/campanha-site..." 
+                  placeholder={dict.components.inputShortnerPlaceHolder}
                   value={linkToCut}
                   readOnly={loadingCut}
                 />
@@ -106,7 +110,7 @@ export default function Home({ params }: { params: { lang: Locale }}) {
                   <Switch 
                     onChange={handleActiveCustomLink}
                     checked={customLink}
-                    title="Personalizar Link"
+                    title={dict.components.titleCustomLink}
                   />
 
                   {/* <Switch 
@@ -122,7 +126,7 @@ export default function Home({ params }: { params: { lang: Locale }}) {
                 </div>
               )}
               <Button 
-                title='Encurtar link'
+                title={dict.components.buttonShortLink}
                 loading={loadingCut}
                 disabled={loadingCut}
                 onClick={handleCutLink}
@@ -131,13 +135,13 @@ export default function Home({ params }: { params: { lang: Locale }}) {
           </BoxTool>
         ) : (
           <BoxTool
-            title='Em breve 🤩!'
+            title={dict.qrCodePage.isComingTitle}
           >
             <div className="flex flex-col items-center justify-center gap-3 w-full">
               <p
                 className="text-grey-400 font-semibold text-base"
               >
-                Estamos trabalhando na melhor experiência para gerar seu QR Code personalizado!
+                {dict.qrCodePage.descriptionComing}
               </p>
               <Image 
                 src={buildingImage} 
