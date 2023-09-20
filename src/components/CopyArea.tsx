@@ -10,7 +10,7 @@ type TCopyProps = {
 export function CopyArea({ title, textToCopy }: TCopyProps){
     function handleCopyText(){
         navigator.clipboard.writeText(textToCopy);
-        toast.success("Link copiado! 🤩");
+        toast.success("Link copied! 🤩");
     }
 
     return (
