@@ -1,4 +1,4 @@
-const defaultLocale = 'en-US';
+const defaultLocale = 'en';
 const langs = [defaultLocale, 'pt-BR'] as const;
 
 const locales = langs as unknown as string[];

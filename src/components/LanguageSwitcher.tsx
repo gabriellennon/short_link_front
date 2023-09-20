@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 type TProps = {
-    activeLanguage: 'pt-BR' | 'en-US'
+    activeLanguage: 'pt-BR' | 'en'
 }
 
 
@@ -15,7 +15,7 @@ export function LanguageSwitcher({ activeLanguage }: TProps) {
     const languageOptions = [
         {
             name: "English",
-            value: "en-US",
+            value: "en",
             flag: usaIcon
         },
         {

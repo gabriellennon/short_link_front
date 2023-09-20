@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link as LinkIcon } from 'lucide-react';
 import { ToggleTools } from '@/components/ToggleTools';
@@ -9,7 +9,7 @@ import { Switch } from '@/components/Switch';
 import { Input } from '@/components/Input';
 import buildingImage from '@/assets/img/tell-us-about-your-needs-product.png';
 import Image from 'next/image';
-import { getShortnerUrl, shortNewLink } from '@/services/shortner.service';
+import { shortNewLink } from '@/services/shortner.service';
 import { isURLValid, removeHttpsPrefix } from '@/utils/functions';
 import { TResponseShortnerPOST } from '@/services/types';
 import { CopyArea } from '@/components/CopyArea';
@@ -27,7 +27,6 @@ export default function Home({ params }: { params: { lang: Locale }}) {
   const [linkToCut, setLinkToCut] = useState('');
   const [shortLinkToCopy, setShortLinkToCopy] = useState('');
   const [loadingCut, setLoadingCut] = useState(false);
-  const [loadingScreen, setLoadingScreen] = useState(false);
 
   const handleChangeToolActive = (tabActive: string) => {
     setToolActive(tabActive)
@@ -35,7 +34,6 @@ export default function Home({ params }: { params: { lang: Locale }}) {
 
   const handleActiveCustomLink = () => {
     setCustomLink(!customLink);
-    // localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode))
   }
 
   const handleTypeLink = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +51,6 @@ export default function Home({ params }: { params: { lang: Locale }}) {
         const responseData: TResponseShortnerPOST = response.data
         localStorage.setItem(`@-link-${responseData.code}`, JSON.stringify(responseData));
         setLinkToCut('');
-        // @TO-DO: Pensar como diminuir esse link (Mandei mensagem pro jose)
         const linkToRedirect = `https://www.icut.li/${responseData.code}`;
         navigator.clipboard.writeText(linkToRedirect);
         setShortLinkToCopy(linkToRedirect);
@@ -75,23 +72,6 @@ export default function Home({ params }: { params: { lang: Locale }}) {
   // const handleGenerateQRCode = () => {
   //   setGenerateQRCode(!generateQRCode);
   // }
-
-  useEffect(() => {
-    setLoadingScreen(true);
-    if(params.lang !== 'en-US' && params.lang !== 'pt-BR') {
-      getShortnerUrl(params.lang).then(response => {
-        window.location.href = response.data.url;
-      }).catch(error => {
-        console.log(error);
-        window.location.href = 'https://www.icut.li/';
-      })
-    }
-    setLoadingScreen(false);
-  },[params])
-
-  if(loadingScreen) {
-    return <FullLoadingScreen />
-  }
 
   return (
     <div className="h-screen bg-blue-200">
