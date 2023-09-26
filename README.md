@@ -1,6 +1,7 @@
 # Short Link | Icut.li ⏰
 
-<img src="https://user-images.githubusercontent.com/32397288/183467598-38f16b0e-e6af-431a-86b1-aaf6c9712ce5.PNG"/>
+![image](https://github.com/gabriellennon/short_link_front/assets/57332512/d9998bb7-5fc4-461d-8445-1f111ddca2af)
+
 
 ## About project 🚀
 
