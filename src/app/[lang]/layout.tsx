@@ -29,6 +29,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.lang}>
+      <head>
+        {process.env.NODE_ENV === "production" && (
+          <script 
+            async 
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5605608693723393" 
+            crossOrigin="anonymous"
+          ></script>
+        )}
+      </head>
       <body className={montserrat.className} suppressHydrationWarning={true}>{children}</body>
     </html>
   )
