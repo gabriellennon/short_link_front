@@ -107,11 +107,11 @@ export default function Home({ params }: { params: { lang: Locale }}) {
                 />
                 {/* Toggles */}
                 <div className="flex items-center justify-center gap-4">
-                  <Switch 
+                  {/* <Switch 
                     onChange={handleActiveCustomLink}
                     checked={customLink}
                     title={dict.components.titleCustomLink}
-                  />
+                  /> */}
 
                   {/* <Switch 
                     onChange={handleGenerateQRCode}
