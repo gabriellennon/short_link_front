@@ -1,33 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Short Link | Icut.li ⏰
 
-## Getting Started
+<img src="https://user-images.githubusercontent.com/32397288/183467598-38f16b0e-e6af-431a-86b1-aaf6c9712ce5.PNG"/>
 
-First, run the development server:
+## About project 🚀
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+The objective of this app is to make a shortner url.
+
+## Technologies 🧑🏻‍💻
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Next Intl (Internationalization)](https://next-intl-docs.vercel.app/)
+
+## How to run
+
+```jsx
+git clone https://github.com/gabriellennon/short_link_front.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```jsx
+#access folder
+cd short_link_fron
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Run
+yarn or npm or pnpm install 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-[Protótipo](https://www.figma.com/file/tyLBdEvl66kA5yecnKuS7W/Projetos-Pessoais?type=design&node-id=1%3A2&mode=design&t=pSUWpBFWPGlQ82fZ-1)
-
--[next-intl](https://next-intl-docs.vercel.app/) Internationalization for Next.js
+## start project
+yarn dev
+npm run dev
+```
