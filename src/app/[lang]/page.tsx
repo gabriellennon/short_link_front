@@ -17,6 +17,7 @@ import { getDictionaryServerOnly } from '@/dictionaries/default-dictionary-serve
 import { Locale } from '@/config/i18n.config';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { FullLoadingScreen } from '@/components/FullLoadingScreen';
+import { Footer } from '@/components/Footer';
 
 export default function Home({ params }: { params: { lang: Locale }}) {
   const dict = getDictionaryServerOnly(params.lang)
@@ -74,89 +75,93 @@ export default function Home({ params }: { params: { lang: Locale }}) {
   // }
 
   return (
-    <div className="h-screen bg-blue-200">
-      <div className='flex gap-5 items-center justify-end w-full p-2'>
-        <span className='font-thin text-sm text-zinc-700'>
-          {dict.shortPage.switchText}
-        </span>
-        <LanguageSwitcher activeLanguage={params.lang} />
-      </div>
-      <main className="w-full flex flex-col items-center justify-center mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-        <ToggleTools 
-          setToolActive={handleChangeToolActive} 
-          toolActive={toolActive} 
-          lang={params.lang}
-        />
-        {toolActive === 'SHORTLINK' ? (
-          <BoxTool 
-            title='Encurte links e personalize com 1 clique!'
-          >
-            <div className="flex flex-col items-center justify-center gap-3 w-full">
-              <p
-                className="text-grey-400 font-semibold text-base"
-              >
-                {dict.qrCodePage.title}
-              </p>
-              <div className="flex flex-col items-center justify-center gap-4 w-full">
-                <Input 
-                  Icon={LinkIcon}
-                  onChange={handleTypeLink}
-                  placeholder={dict.components.inputShortnerPlaceHolder}
-                  value={linkToCut}
-                  readOnly={loadingCut}
-                />
-                {/* Toggles */}
-                <div className="flex items-center justify-center gap-4">
-                  {/* <Switch 
-                    onChange={handleActiveCustomLink}
-                    checked={customLink}
-                    title={dict.components.titleCustomLink}
-                  /> */}
+    <div className="h-screen bg-blue-200 flex flex-col justify-between">
+      <section>
+        <div className='flex gap-5 items-center justify-end w-full p-2'>
+          <span className='font-thin text-sm text-zinc-700'>
+            {dict.shortPage.switchText}
+          </span>
+          <LanguageSwitcher activeLanguage={params.lang} />
+        </div>
+        <main className="w-full flex flex-col items-center justify-center mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+          <ToggleTools 
+            setToolActive={handleChangeToolActive} 
+            toolActive={toolActive} 
+            lang={params.lang}
+          />
+          {toolActive === 'SHORTLINK' ? (
+            <BoxTool 
+              title='Encurte links e personalize com 1 clique!'
+            >
+              <div className="flex flex-col items-center justify-center gap-3 w-full">
+                <p
+                  className="text-grey-400 font-semibold text-base"
+                >
+                  {dict.qrCodePage.title}
+                </p>
+                <div className="flex flex-col items-center justify-center gap-4 w-full">
+                  <Input 
+                    Icon={LinkIcon}
+                    onChange={handleTypeLink}
+                    placeholder={dict.components.inputShortnerPlaceHolder}
+                    value={linkToCut}
+                    readOnly={loadingCut}
+                  />
+                  {/* Toggles */}
+                  <div className="flex items-center justify-center gap-4">
+                    {/* <Switch 
+                      onChange={handleActiveCustomLink}
+                      checked={customLink}
+                      title={dict.components.titleCustomLink}
+                    /> */}
 
-                  {/* <Switch 
-                    onChange={handleGenerateQRCode}
-                    checked={generateQRCode}
-                    title="Gerar QR Code"
-                  /> */}
+                    {/* <Switch 
+                      onChange={handleGenerateQRCode}
+                      checked={generateQRCode}
+                      title="Gerar QR Code"
+                    /> */}
+                  </div>
                 </div>
+                {!!shortLinkToCopy && (
+                  <div className="mt-6">
+                    <CopyArea title={removeHttpsPrefix(shortLinkToCopy)} textToCopy={shortLinkToCopy} />
+                  </div>
+                )}
+                <Button 
+                  title={dict.components.buttonShortLink}
+                  loading={loadingCut}
+                  disabled={loadingCut}
+                  onClick={handleCutLink}
+                />
               </div>
-              {!!shortLinkToCopy && (
-                <div className="mt-6">
-                  <CopyArea title={removeHttpsPrefix(shortLinkToCopy)} textToCopy={shortLinkToCopy} />
-                </div>
-              )}
-              <Button 
-                title={dict.components.buttonShortLink}
-                loading={loadingCut}
-                disabled={loadingCut}
-                onClick={handleCutLink}
-              />
-            </div>
-          </BoxTool>
-        ) : (
-          <BoxTool
-            title={dict.qrCodePage.isComingTitle}
-          >
-            <div className="flex flex-col items-center justify-center gap-3 w-full">
-              <p
-                className="text-grey-400 font-semibold text-base"
-              >
-                {dict.qrCodePage.descriptionComing}
-              </p>
-              <Image 
-                src={buildingImage} 
-                alt="Imagem de pessoas construindo algo" 
-                width={500}
-                height={500}
-              />
-            </div>
-          </BoxTool>
-        )}
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-        />
-      </main>
+            </BoxTool>
+          ) : (
+            <BoxTool
+              title={dict.qrCodePage.isComingTitle}
+            >
+              <div className="flex flex-col items-center justify-center gap-3 w-full">
+                <p
+                  className="text-grey-400 font-semibold text-base"
+                >
+                  {dict.qrCodePage.descriptionComing}
+                </p>
+                <Image 
+                  src={buildingImage} 
+                  alt="Imagem de pessoas construindo algo" 
+                  width={500}
+                  height={500}
+                />
+              </div>
+            </BoxTool>
+          )}
+
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+          />
+        </main>
+      </section>
+      <Footer />
     </div>
 
   )
