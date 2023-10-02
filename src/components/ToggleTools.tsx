@@ -25,7 +25,7 @@ export function ToggleTools ({ setToolActive, toolActive, lang }: TToggleToolsPr
             >
                 {dict.components.shortLinkButton}
             </button>
-            <button 
+            {/* <button 
                 className={clsx(
                     "flex items-center justify-center w-32 h-12 p-4 font-semibold rounded-lg text-black-300", {
                         'text-white bg-blue-500': toolActive === 'QRCODE'
@@ -34,7 +34,7 @@ export function ToggleTools ({ setToolActive, toolActive, lang }: TToggleToolsPr
                 onClick={() => setToolActive('QRCODE')}
             >
                 QR code
-            </button>
+            </button> */}
         </div>
     )
 }
