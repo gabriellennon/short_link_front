@@ -18,10 +18,10 @@ import { Locale } from '@/config/i18n.config';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { FullLoadingScreen } from '@/components/FullLoadingScreen';
 import { Footer } from '@/components/Footer';
+import CookieConsent from '@/components/CookieConsent';
 
 export default function Home({ params }: { params: { lang: Locale }}) {
   const dict = getDictionaryServerOnly(params.lang)
-
   const [customLink, setCustomLink] = useState(false);
   // const [generateQRCode, setGenerateQRCode] = useState(false);
   const [toolActive, setToolActive] = useState('SHORTLINK');
@@ -154,12 +154,13 @@ export default function Home({ params }: { params: { lang: Locale }}) {
               </div>
             </BoxTool>
           )}
-
-          <Toaster
-            position="top-right"
-            reverseOrder={false}
-          />
         </main>
+        <CookieConsent />
+        
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+          />
       </section>
       <Footer />
     </div>
